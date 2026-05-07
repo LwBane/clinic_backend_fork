@@ -1,8 +1,10 @@
 import { Router } from "express";
 import { prisma } from "../prisma/prisma";
-import type { Exame } from "../prisma/generated/prisma/client";
+import { Role, type Exame } from "../prisma/generated/prisma/client";
+import { roleMiddleware } from "../middleware/role";
 
 export const exameRouter = Router()
+exameRouter.use(roleMiddleware([Role.ADMIN]))
 
 //Exames
 exameRouter.get('/exames', async (_, res) => {

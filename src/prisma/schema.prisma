@@ -13,13 +13,18 @@ datasource db {
   provider = "postgresql"
 }
 
+enum Role {
+  ADMIN
+  USER
+}
+
 model Usuario {
-  id          Int          @id @default(autoincrement())
-  email       String       @unique
-  nome        String?
-  senha       String
-  tokens      Token[]
-  prontuarios Prontuario[]
+  id     Int     @id @default(autoincrement())
+  email  String  @unique
+  nome   String?
+  senha  String
+  role   Role    @default(USER)
+  tokens Token[]
 
   @@map("usuario")
 }
